@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.food_delivery_app_using_flutter_and_supabase"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
