@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/core/models/on_bording_model.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/core/utils/consts.dart';
+import 'package:food_delivery_app_using_flutter_and_supabase/pages/screens/app_main_screen.dart';
+import 'package:food_delivery_app_using_flutter_and_supabase/pages/screens/food_app_home_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -133,7 +135,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     SizedBox(height: 30),
                     MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AppMainScreen(),
+                          ),
+                        );
+                      },
                       color: red,
                       height: 65,
                       minWidth: 250,
