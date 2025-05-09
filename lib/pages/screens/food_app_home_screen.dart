@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app_using_flutter_and_supabase/core/models/categories_model.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/core/utils/consts.dart';
 
 class FoodAppHomeScreen extends StatefulWidget {
@@ -10,6 +11,10 @@ class FoodAppHomeScreen extends StatefulWidget {
 }
 
 class _FoodAppHomeScreenState extends State<FoodAppHomeScreen> {
+  late Future<List<CategoryModel>> futureCategories = fetchCategories();
+  Future<List<CategoryModel>> fetchCategories() async{
+    return [];
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,69 +28,70 @@ class _FoodAppHomeScreenState extends State<FoodAppHomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 appBanners(),
+                SizedBox(height: 25),
+                Text(
+                  "Categories",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),
+          _buildCategoryList(),
         ],
       ),
     );
   }
 
+  Widget _buildCategoryList(){
+    return SizedBox();
+  }
+
   Container appBanners() {
     return Container(
-                height: 160,
-                padding: EdgeInsets.only(top: 25, right: 25, left: 25),
-                decoration: BoxDecoration(
-                  color: imageBackground,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 10),
-                          RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: "The Fastest In Delivery",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                TextSpan(
-                                  text: "Food",
-                                  style: TextStyle(color: red),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 15,
-                              vertical: 9,
-                            ),
-                            decoration: BoxDecoration(
-                              color: red,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Text(
-                              "Order Now",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ],
+      height: 160,
+      padding: EdgeInsets.only(top: 25, right: 25, left: 25),
+      decoration: BoxDecoration(
+        color: imageBackground,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 10),
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    children: [
+                      TextSpan(
+                        text: "The Fastest In Delivery",
+                        style: TextStyle(color: Colors.black),
                       ),
-                    ),
-                    Image.asset("assets/food-delivery/courier.png"),
-                  ],
+                      TextSpan(text: "Food", style: TextStyle(color: red)),
+                    ],
+                  ),
                 ),
-              );
+                SizedBox(height: 10),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+                  decoration: BoxDecoration(
+                    color: red,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Text(
+                    "Order Now",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Image.asset("assets/food-delivery/courier.png"),
+        ],
+      ),
+    );
   }
 
   AppBar appbarParts() {
