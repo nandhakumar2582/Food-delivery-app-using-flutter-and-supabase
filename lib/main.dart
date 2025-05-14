@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/pages/auth/login_screen.dart';
-import 'package:food_delivery_app_using_flutter_and_supabase/pages/auth/signup_screen.dart';
-import 'package:food_delivery_app_using_flutter_and_supabase/pages/screens/profile_screen.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/pages/screens/app_main_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
