@@ -66,6 +66,7 @@ flutter:
     - assets/
     - assets/food-delivery/
     - assets/food-delivery/icon/
+    - assets/food-delivery/product/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

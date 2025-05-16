@@ -1,8 +1,10 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app_using_flutter_and_supabase/Widgets/products_items_display.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/core/models/categories_model.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/core/models/product_model.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/core/utils/consts.dart';
+import 'package:food_delivery_app_using_flutter_and_supabase/pages/screens/view_all_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class FoodAppHomeScreen extends StatefulWidget {
@@ -124,10 +126,10 @@ class _FoodAppHomeScreenState extends State<FoodAppHomeScreen> {
             itemBuilder: (context, index) {
               return Padding(
                 padding: EdgeInsets.only(
-                  left: index == 0 ? 25 : 0,
+                  left: 25,
                   right: index == products.length - 1 ? 25 : 0,
                 ),
-                //   child:
+                child: ProductsItemsDisplay(foodModel: products[index]),
               );
             },
           );
@@ -147,6 +149,14 @@ class _FoodAppHomeScreenState extends State<FoodAppHomeScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ViewAllProductsScreen(),
+                ),
+              );
+            },
             child: Row(
               children: [
                 Text("View All", style: TextStyle(color: orange)),
