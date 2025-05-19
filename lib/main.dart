@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/pages/auth/login_screen.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/pages/screens/app_main_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -18,7 +19,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: AuthCheck());
+    return ProviderScope(
+      child: MaterialApp(debugShowCheckedModeBanner: false, home: AuthCheck()),
+    );
   }
 }
 

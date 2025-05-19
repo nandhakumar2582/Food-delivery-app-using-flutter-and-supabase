@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/core/models/product_model.dart';
+import 'package:food_delivery_app_using_flutter_and_supabase/core/provider/favorite_provider.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/core/utils/consts.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/pages/screens/food_detail_screen.dart';
 
-class ProductsItemsDisplay extends StatefulWidget {
+class ProductsItemsDisplay extends ConsumerWidget {
   final FoodModel foodModel;
   const ProductsItemsDisplay({super.key, required this.foodModel});
 
   @override
-  State<ProductsItemsDisplay> createState() => _ProductsItemsDisplayState();
-}
-
-class _ProductsItemsDisplayState extends State<ProductsItemsDisplay> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.watch(favoriteProvider);
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
@@ -23,7 +21,7 @@ class _ProductsItemsDisplayState extends State<ProductsItemsDisplay> {
             transitionDuration: Duration(seconds: 1),
             pageBuilder:
                 (context, animation, secondaryAnimation) =>
-                    FoodDetailScreen(product: widget.foodModel),
+                    FoodDetailScreen(product: foodModel),
           ),
         );
       },
@@ -53,13 +51,22 @@ class _ProductsItemsDisplayState extends State<ProductsItemsDisplay> {
             top: 10,
             right: 10,
             child: GestureDetector(
+              onTap: () {
+                ref.read(favoriteProvider).toggleFavourite(foodModel.name);
+              },
               child: CircleAvatar(
                 radius: 15,
-                backgroundColor: Colors.red[100],
-                child: Image.asset(
-                  "assets/food-delivery/icon/fire.png",
-                  height: 22,
-                ),
+                backgroundColor:
+                    provider.isExist(foodModel.name)
+                        ? Colors.red[100]
+                        : Colors.transparent,
+                child:
+                    provider.isExist(foodModel.name)
+                        ? Image.asset(
+                          "assets/food-delivery/icon/fire.png",
+                          height: 22,
+                        )
+                        : Icon(Icons.local_fire_department, color: red),
               ),
             ),
           ),
@@ -70,9 +77,9 @@ class _ProductsItemsDisplayState extends State<ProductsItemsDisplay> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Hero(
-                  tag: widget.foodModel.imageCard,
+                  tag: foodModel.imageCard,
                   child: Image.network(
-                    widget.foodModel.imageCard,
+                    foodModel.imageCard,
                     height: 140,
                     width: 150,
                     fit: BoxFit.fill,
@@ -81,7 +88,7 @@ class _ProductsItemsDisplayState extends State<ProductsItemsDisplay> {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 15),
                   child: Text(
-                    widget.foodModel.name,
+                    foodModel.name,
                     maxLines: 1,
                     style: TextStyle(
                       fontSize: 18,
@@ -91,7 +98,7 @@ class _ProductsItemsDisplayState extends State<ProductsItemsDisplay> {
                   ),
                 ),
                 Text(
-                  widget.foodModel.specialItems,
+                  foodModel.specialItems,
                   style: TextStyle(
                     height: 0.1,
                     letterSpacing: 0.5,
@@ -109,7 +116,7 @@ class _ProductsItemsDisplayState extends State<ProductsItemsDisplay> {
                         style: TextStyle(fontSize: 14, color: red),
                       ),
                       TextSpan(
-                        text: "${widget.foodModel.price}",
+                        text: "${foodModel.price}",
                         style: TextStyle(fontSize: 25, color: Colors.black),
                       ),
                     ],
