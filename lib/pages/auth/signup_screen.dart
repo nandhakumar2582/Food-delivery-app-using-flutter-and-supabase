@@ -22,7 +22,7 @@ class _SignupScreenState extends State<SignupScreen> {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
     if (!email.contains(".com")) {
-      showSnackBar(context, "Invalid email. It mush contain .com");
+      showSnackBar(context, "Invalid email. It mush contain .com", Colors.red);
     }
     setState(() {
       isLoading = true;
@@ -33,7 +33,11 @@ class _SignupScreenState extends State<SignupScreen> {
       setState(() {
         isLoading = false;
       });
-      showSnackBar(context, "Signup Successful! Now Turn to Login");
+      showSnackBar(
+        context,
+        "Signup Successful! Now Turn to Login",
+        Colors.green,
+      );
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => LoginScreen()),
@@ -42,7 +46,7 @@ class _SignupScreenState extends State<SignupScreen> {
       setState(() {
         isLoading = false;
       });
-      showSnackBar(context, "Signup Failed: $result");
+      showSnackBar(context, "Signup Failed: $result", Colors.red);
     }
   }
 

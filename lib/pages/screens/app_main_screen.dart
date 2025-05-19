@@ -1,28 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:food_delivery_app_using_flutter_and_supabase/core/provider/cart_provider.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/core/utils/consts.dart';
+import 'package:food_delivery_app_using_flutter_and_supabase/pages/screens/User_Activity/cart_screen.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/pages/screens/User_Activity/favorite_screen.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/pages/screens/food_app_home_screen.dart';
 import 'package:food_delivery_app_using_flutter_and_supabase/pages/screens/profile_screen.dart';
 import 'package:iconsax/iconsax.dart';
 
-class AppMainScreen extends StatefulWidget {
+class AppMainScreen extends ConsumerStatefulWidget {
   const AppMainScreen({super.key});
 
   @override
-  State<AppMainScreen> createState() => _AppMainScreenState();
+  ConsumerState<AppMainScreen> createState() => _AppMainScreenState();
 }
 
-class _AppMainScreenState extends State<AppMainScreen> {
+class _AppMainScreenState extends ConsumerState<AppMainScreen> {
   int currentIndex = 0;
   final List<Widget> _pages = [
     FoodAppHomeScreen(),
     FavoriteScreen(),
     ProfileScreen(),
-    Scaffold(),
+    CartScreen(),
   ];
   @override
   Widget build(BuildContext context) {
+    CartProvider cp = ref.watch(cartProvider);
     return Scaffold(
       body: _pages[currentIndex],
       bottomNavigationBar: SafeArea(
@@ -48,7 +52,10 @@ class _AppMainScreenState extends State<AppMainScreen> {
                     child: CircleAvatar(
                       backgroundColor: red,
                       radius: 10,
-                      child: Text("0", style: TextStyle(fontSize: 12)),
+                      child: Text(
+                        cp.items.length.toString(),
+                        style: TextStyle(fontSize: 12),
+                      ),
                     ),
                   ),
                   Positioned(

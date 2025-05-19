@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         isLoading = false;
       });
-      showSnackBar(context, "Logged in successfully");
+      showSnackBar(context, "Logged in successfully", Colors.green);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => OnboardingScreen()),
@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         isLoading = false;
       });
-      showSnackBar(context, "Signup Failed: $result");
+      showSnackBar(context, "Signup Failed: $result", Colors.red);
     }
   }
 
